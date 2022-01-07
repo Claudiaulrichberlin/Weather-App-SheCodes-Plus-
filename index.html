@@ -9,21 +9,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Your Weather</title>
 </head>
 <body>
     <div class="container">
         <div class="row align-items-start Box1">
             <div class="col-6">
-              <h1>Berlin</h1>
+              <h1 id="city">Berlin</h1>
               
             </br>
               <ul>
-                  <li>Sunny and windy</li>
+                  <li id="description">Sunny and windy</li>
               </br>
-                  <li>Precipitation: 50%</li>
-                  <li>Humidity: 80%</li>
-                  <li>Wind: 10km/h</li>
+                  <li>Humidity: <span id="humid"> 80</span> %</li>
+                  <li>Wind <span id="wind"> 10</span> km/h</li>
               </ul>
               
             </div>
