@@ -38,14 +38,14 @@ h2.innerHTML= `Today, ${day}, ${month} ${date}, ${hour}:${minutes}`;
 
 let apiKey= "d33b97a34ddb5f2f68fc2d4628e9869a";
 let apiUrl="https://api.openweathermap.org/data/2.5/weather?";
-let city= 'Madrid'
+let city= 'Amsterdam'
 axios.get(`${apiUrl}q=${city}&APPID=${apiKey}&units=metric`).then(showTemperature);
 
 
 function showTemperature (response)
 {
 let temperature = Math.round(response.data.main.temp);
-let h3 = document.querySelector("h3");
+let h3 = document.querySelector("#temperature");
     h3.innerHTML= (temperature);
 let cityElement = document.querySelector("#city");
 cityElement.innerHTML= response.data.name;
