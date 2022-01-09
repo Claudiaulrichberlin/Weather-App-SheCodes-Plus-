@@ -77,7 +77,7 @@ function showFahrenheit(event)
     
     let temperatureElement = document.querySelector("#temperature");
     let fahrenheitTemperature = celsiusTemperature * 9/5 +32;
-    temperatureElement.innerHTML = fahrenheitTemperature;
+    temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 let fahrenheitlink = document.querySelector("#fahrenheitLink");
 fahrenheitlink.addEventListener("click",showFahrenheit);
@@ -86,10 +86,10 @@ function showCelsius(event)
 {event.preventDefault();
    
     let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML = celsiusTemperature;
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 let celsiuslink = document.querySelector("#celsiusLink");
-celsiuslink= document.querySelector("click",showCelsius);
+celsiuslink.addEventListener("click",showCelsius);
 
 
 
