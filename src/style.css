@@ -52,3 +52,11 @@ h3 {
   position: relative;
   z-index: -1;
 }
+.active {
+  cursor: default;
+  color: #606060;
+  text-decoration: none;
+}
+.active:hover {
+  text-decoration: none;
+}
