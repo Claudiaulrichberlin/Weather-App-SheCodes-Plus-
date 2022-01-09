@@ -38,7 +38,7 @@ h2.innerHTML= `Today, ${day}, ${month} ${date}, ${hour}:${minutes}`;
 
 let apiKey= "d33b97a34ddb5f2f68fc2d4628e9869a";
 let apiUrl="https://api.openweathermap.org/data/2.5/weather?";
-let city= 'Amsterdam'
+let city= 'Miami'
 axios.get(`${apiUrl}q=${city}&APPID=${apiKey}&units=metric`).then(showTemperature);
 
 
@@ -56,6 +56,8 @@ let humidElement= document.querySelector("#humid");
 humidElement.innerHTML = response.data.main.humidity;
 let windElement = document.querySelector("#wind");
 windElement.innerHTML = response.data.wind.speed;
+let iconElement = document.querySelector("#icon");
+iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 };
 
 

@@ -7,11 +7,6 @@ body {
   background: linear-gradient(#abcdef, #ffffe0);
   font-size: 12px;
 }
-li {
-  padding-left: 20px;
-  list-style-type: none;
-  text-transform: capitalize;
-}
 .Box1 {
   margin-left: 10px;
   margin-right: 10px;
@@ -20,6 +15,11 @@ li {
   border-radius: 50px;
   position: relative;
   top: 40px;
+}
+li {
+  padding-left: 20px;
+  list-style-type: none;
+  text-transform: capitalize;
 }
 h1 {
   font-size: 30px;
@@ -39,12 +39,12 @@ h3 {
   font-size: 70px;
   color: #6699cc;
 }
-
 .Today {
   padding-top: 0px;
   padding-bottom: 0px;
   margin-bottom: 0;
 }
 .mainimage {
-  padding-bottom: 20px;
+  position: relative;
+  z-index: -1;
 }
