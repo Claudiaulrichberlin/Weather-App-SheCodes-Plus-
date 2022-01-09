@@ -35,20 +35,26 @@ h2.innerHTML= `Today, ${day}, ${month} ${date}, ${hour}:${minutes}`;
 
 // finding weather data
 
-
+function search(event)
+{event.preventDefault();
 let apiKey= "d33b97a34ddb5f2f68fc2d4628e9869a";
 let apiUrl="https://api.openweathermap.org/data/2.5/weather?";
-let city= 'Miami'
-axios.get(`${apiUrl}q=${city}&APPID=${apiKey}&units=metric`).then(showTemperature);
+let stadt= document.querySelector("#city-input").value;
+axios.get(`${apiUrl}q=${stadt}&APPID=${apiKey}&units=metric`).then(showTemperature);
+};
 
+let form = document.querySelector("#form-input");
+form.addEventListener("submit", search);
 
 function showTemperature (response)
 {
+let searchInput = document.querySelector("#city-input");
+let h1 = document.querySelector("h1");
+    h1.innerHTML = `${searchInput.value}`;
+
 let temperature = Math.round(response.data.main.temp);
 let h3 = document.querySelector("#temperature");
     h3.innerHTML= (temperature);
-let cityElement = document.querySelector("#city");
-cityElement.innerHTML= response.data.name;
 let descriptionElement = document.querySelector("#description");
 descriptionElement.innerHTML = response.data.weather[0].description;
 console.log(response.data);

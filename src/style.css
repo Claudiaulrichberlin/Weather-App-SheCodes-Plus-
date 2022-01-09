@@ -28,6 +28,10 @@ h1 {
   color: #6699cc;
   text-transform: uppercase;
 }
+form {
+  padding-bottom: 50px;
+  padding-left: 45px;
+}
 h2 {
   margin-top: 20px;
   padding-left: 0px;
