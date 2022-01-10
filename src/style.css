@@ -60,3 +60,25 @@ h3 {
 .active:hover {
   text-decoration: none;
 }
+
+.Box {
+  position: relative;
+  padding-top: 20px;
+  background-color: white;
+  opacity: 0.5;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.temperature {
+  color: #6699cc;
+  font-weight: bolder;
+}
+.avgtemp {
+  color: #6699cc;
+  font-weight: 900;
+  font-size: 18px;
+}
+.signature {
+  margin-left: 200px;
+}
