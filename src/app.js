@@ -50,6 +50,8 @@ let celsiusTemperature= null;
 let form = document.querySelector("#form-input");
 form.addEventListener("submit", search);
 
+
+
 function showTemperature (response)
 {
 let searchInput = document.querySelector("#city-input");
@@ -93,11 +95,44 @@ function showCelsius(event)
 let celsiuslink = document.querySelector("#celsiusLink");
 celsiuslink.addEventListener("click",showCelsius);
 
+//forecast function
+
+function displayForecast() {
+let forecastElement = document.querySelector("#forecast");
+let forecastHTML= "";
+let weekday = ["Thu", "Fri", "Sat", "Sun", "Mo"];
+weekday.forEach(function (day) {
+
+    forecastHTML=forecastHTML + `<div class="row align-items-start Box">
+<div class="col">
+    <p>${day}</p>
+  </div>
+<div class="col">
+    <p>Nov, 14th</p>
+</div>
+<div class="col">
+    <p><i class="fas fa-cloud avgtemp"></i></p>
+</div>
+<div class="col">
+    <p>Min <span class="temperature"> 3°</span></p>
+  </div>
+<div class="col">
+    <p>Max <span class="temperature"> 5°</span></p>
+</div>
+<div class="col">
+    <p><span class="avgtemp">7°</span></p>
+</div>
+</div>
+</br>`;
+
+});
 
 
+forecastElement.innerHTML= forecastHTML;
+
+}
+
+displayForecast ();
 
 
-
-
-
-
+    

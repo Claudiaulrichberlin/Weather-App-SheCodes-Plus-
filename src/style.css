@@ -63,6 +63,7 @@ h3 {
 
 .Box {
   position: relative;
+  left: 0px;
   padding-top: 20px;
   background-color: white;
   opacity: 0.5;
