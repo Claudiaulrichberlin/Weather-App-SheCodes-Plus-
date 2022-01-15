@@ -41,7 +41,7 @@ function formatDay(timestamp) {
     return days[day];
   }
 
-  
+
 
 function search(event)
 {event.preventDefault();
@@ -49,14 +49,52 @@ let apiKey= "d33b97a34ddb5f2f68fc2d4628e9869a";
 let apiUrl="https://api.openweathermap.org/data/2.5/weather?";
 let stadt= document.querySelector("#city-input").value;
 axios.get(`${apiUrl}q=${stadt}&APPID=${apiKey}&units=metric`).then(showTemperature);
-};
 
+};
 let celsiusTemperature= null;
 
-let form = document.querySelector("#form-input");
+
+  let form = document.querySelector("#form-input");
 form.addEventListener("submit", search);
 
+  function displayForecast(response) {
+    let prediction = response.data.daily;
+let forecastElement = document.querySelector("#forecast");
+let forecastHTML= "";
+prediction.forEach(function(predictionDay, index) {
+    if(index<6) {
+    forecastHTML=forecastHTML + `<div class="row align-items-start Box">
+<div class="col">
+    <p>${formatDay(predictionDay.dt)}</p>
+  </div>
+<div class="col">
+    <p>Nov, 14th</p>
+</div>
+<div class="col">
+   <img src="http://openweathermap.org/img/wn/${predictionDay.weather[0].icon}@2x.png" alt=""/>
+</div>
+<div class="col">
+    <p>Min <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
+  </div>
+<div class="col">
+    <p>Max <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
+</div>
+<div class="col">
+    <p><span class="avgtemp">${predictionDay.temp.max}°</span></p>
+</div>
+</div>
+</br>`;
+    }
+});
+forecastElement.innerHTML= forecastHTML;
+} 
 
+function getForecast(coordinates) {
+    console.log(coordinates);
+    let apiKey = "d33b97a34ddb5f2f68fc2d4628e9869a";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayForecast);
+  } 
 
 function showTemperature (response)
 {
@@ -76,39 +114,12 @@ windElement.innerHTML = response.data.wind.speed;
 let iconElement = document.querySelector("#icon");
 iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 celsiusTemperature = Math.round(response.data.main.temp);
-};
+getForecast(response.data.coord);
 
-function displayForecast(response) {
-    let prediction = response.data.daily;
-    let forecastElement = document.querySelector("#forecast");
-    let forecastHTML= "";
-    prediction.forEach(function(predictionDay, index) {
-        if(index<6) {
-        forecastHTML=forecastHTML + `<div class="row align-items-start Box">
-    <div class="col">
-        <p>${formatDay(predictionDay.dt)}</p>
-      </div>
-    <div class="col">
-        <p>Nov, 14th</p>
-    </div>
-    <div class="col">
-       <img src="http://openweathermap.org/img/wn/${predictionDay.weather[0].icon}@2x.png" alt="" />
-    </div>
-    <div class="col">
-        <p>Min <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
-      </div>
-    <div class="col">
-        <p>Max <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
-    </div>
-    <div class="col">
-        <p><span class="avgtemp">${predictionDay.temp.max}°</span></p>
-    </div>
-    </div>
-    </br>`;
-        }
-    });
-    forecastElement.innerHTML= forecastHTML;
-    } 
+}
+
+
+
 //converting Celsius to Fahrenheit and vice versa
 
 function showFahrenheit(event)
@@ -119,6 +130,7 @@ function showFahrenheit(event)
     let fahrenheitTemperature = celsiusTemperature * 9/5 +32;
     temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
+
 let fahrenheitlink = document.querySelector("#fahrenheitLink");
 fahrenheitlink.addEventListener("click",showFahrenheit);
 
@@ -129,6 +141,7 @@ function showCelsius(event)
     let temperatureElement = document.querySelector("#temperature");
     temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
+
 let celsiuslink = document.querySelector("#celsiusLink");
 celsiuslink.addEventListener("click",showCelsius);
 
