@@ -33,9 +33,15 @@ let minutes = now.getMinutes();
 let h2 = document.querySelector("h2");
 h2.innerHTML= `Today, ${day}, ${month} ${date}, ${hour}:${minutes}`;
 
-// finding weather data
+function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let day = date.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  
+    return days[day];
+  }
 
-
+  
 
 function search(event)
 {event.preventDefault();
@@ -72,7 +78,38 @@ iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data
 celsiusTemperature = Math.round(response.data.main.temp);
 };
 
-
+function displayForecast(response) {
+    let prediction = response.data.daily;
+    let forecastElement = document.querySelector("#forecast");
+    let forecastHTML= "";
+    prediction.forEach(function(predictionDay, index) {
+        if(index<6) {
+        forecastHTML=forecastHTML + `<div class="row align-items-start Box">
+    <div class="col">
+        <p>${formatDay(predictionDay.dt)}</p>
+      </div>
+    <div class="col">
+        <p>Nov, 14th</p>
+    </div>
+    <div class="col">
+       <img src="http://openweathermap.org/img/wn/${predictionDay.weather[0].icon}@2x.png" alt="" />
+    </div>
+    <div class="col">
+        <p>Min <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
+      </div>
+    <div class="col">
+        <p>Max <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
+    </div>
+    <div class="col">
+        <p><span class="avgtemp">${predictionDay.temp.max}°</span></p>
+    </div>
+    </div>
+    </br>`;
+        }
+    });
+    forecastElement.innerHTML= forecastHTML;
+    } 
+//converting Celsius to Fahrenheit and vice versa
 
 function showFahrenheit(event)
 {event.preventDefault();
@@ -94,45 +131,6 @@ function showCelsius(event)
 }
 let celsiuslink = document.querySelector("#celsiusLink");
 celsiuslink.addEventListener("click",showCelsius);
-
-//forecast function
-
-function displayForecast() {
-let forecastElement = document.querySelector("#forecast");
-let forecastHTML= "";
-let weekday = ["Thu", "Fri", "Sat", "Sun", "Mo"];
-weekday.forEach(function (day) {
-
-    forecastHTML=forecastHTML + `<div class="row align-items-start Box">
-<div class="col">
-    <p>${day}</p>
-  </div>
-<div class="col">
-    <p>Nov, 14th</p>
-</div>
-<div class="col">
-    <p><i class="fas fa-cloud avgtemp"></i></p>
-</div>
-<div class="col">
-    <p>Min <span class="temperature"> 3°</span></p>
-  </div>
-<div class="col">
-    <p>Max <span class="temperature"> 5°</span></p>
-</div>
-<div class="col">
-    <p><span class="avgtemp">7°</span></p>
-</div>
-</div>
-</br>`;
-
-});
-
-
-forecastElement.innerHTML= forecastHTML;
-
-}
-
-displayForecast ();
 
 
     
