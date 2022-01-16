@@ -81,5 +81,9 @@ h3 {
   font-size: 18px;
 }
 .signature {
-  margin-left: 200px;
+  margin-left: 30px;
+}
+.icons {
+  position: relative;
+  margin-bottom: 100px;
 }

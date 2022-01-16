@@ -51,8 +51,15 @@ let stadt= document.querySelector("#city-input").value;
 axios.get(`${apiUrl}q=${stadt}&APPID=${apiKey}&units=metric`).then(showTemperature);
 
 };
-let celsiusTemperature= null;
 
+function find(city)
+{
+    let apiKey= "d33b97a34ddb5f2f68fc2d4628e9869a";
+    let apiUrl="https://api.openweathermap.org/data/2.5/weather?";
+    let stadt= "Berlin";
+    axios.get(`${apiUrl}q=${stadt}&APPID=${apiKey}&units=metric`).then(showTemperature);
+    
+};
 
   let form = document.querySelector("#form-input");
 form.addEventListener("submit", search);
@@ -68,10 +75,7 @@ prediction.forEach(function(predictionDay, index) {
     <p>${formatDay(predictionDay.dt)}</p>
   </div>
 <div class="col">
-    <p>Nov, 14th</p>
-</div>
-<div class="col">
-   <img src="http://openweathermap.org/img/wn/${predictionDay.weather[0].icon}@2x.png" alt=""/>
+   <img src="http://openweathermap.org/img/wn/${predictionDay.weather[0].icon}@2x.png" alt="" width="60" />
 </div>
 <div class="col">
     <p>Min <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
@@ -80,7 +84,7 @@ prediction.forEach(function(predictionDay, index) {
     <p>Max <span class="temperature"> ${Math.round(predictionDay.temp.max)}°</span></p>
 </div>
 <div class="col">
-    <p><span class="avgtemp">${predictionDay.temp.max}°</span></p>
+    <p><span class="avgtemp">${Math.round(predictionDay.temp.max)}°</span></p>
 </div>
 </div>
 </br>`;
@@ -118,32 +122,10 @@ getForecast(response.data.coord);
 
 }
 
+find("Berlin");
 
 
-//converting Celsius to Fahrenheit and vice versa
 
-function showFahrenheit(event)
-{event.preventDefault();
-    celsiuslink.classList.remove("active");
-    fahrenheitlink.classList.add("active");
-    let temperatureElement = document.querySelector("#temperature");
-    let fahrenheitTemperature = celsiusTemperature * 9/5 +32;
-    temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
-let fahrenheitlink = document.querySelector("#fahrenheitLink");
-fahrenheitlink.addEventListener("click",showFahrenheit);
-
-function showCelsius(event)
-{event.preventDefault();
-    celsiuslink.classList.add("active");
-    fahrenheitlink.classList.remove("active");
-    let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-let celsiuslink = document.querySelector("#celsiusLink");
-celsiuslink.addEventListener("click",showCelsius);
 
 
     
